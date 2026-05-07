@@ -1,0 +1,986 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-logo a {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #ff6b6b;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ff6b6b;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding-top: 70px;
+    padding-left: 50px;
+}
+
+.hero-content {
+    flex: 1;
+    max-width: 600px;
+    padding-right: 50px;
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.highlight {
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+    font-size: 1.3em;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    padding: 18px 40px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+}
+
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image i {
+    font-size: 20em;
+    opacity: 0.1;
+}
+
+/* Lapangan Section */
+.lapangan {
+    padding: 100px 0;
+    background: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.8em;
+    font-weight: 700;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, #333, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 60px;
+}
+
+.lapangan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.lapangan-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.lapangan-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.card-image {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.lapangan-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.kategori-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card-content h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.deskripsi {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.harga {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 25px;
+}
+
+.harga-text {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #ff6b6b;
+}
+
+.harga-sub {
+    color: #999;
+    font-size: 0.9em;
+}
+
+.btn-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 24px;
+    border: 2px solid #667eea;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-detail:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Detail Lapangan (lanjutan) */
+.detail-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin: 120px 0 80px;
+    align-items: center;
+}
+
+.detail-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.detail-info h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.kategori-badge.big {
+    font-size: 1em;
+    padding: 12px 24px;
+}
+
+.harga-big {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.harga-big span {
+    font-size: 3em;
+    font-weight: 800;
+    color: #9cebff;
+}
+
+.harga-big small {
+    font-size: 1.2em;
+    color: #999;
+}
+
+.deskripsi-full {
+    font-size: 1.1em;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.btn-pesan {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #5bc8ff, #4ecdc4);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px #8ef4ff;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* Availability Section */
+.availability-section {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin-bottom: 80px;
+}
+
+.availability-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.availability-section p {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.jadwal-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.jadwal-table th,
+.jadwal-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.jadwal-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-badge.pending { background: #fff3cd; color: #856404; }
+.status-badge.dibayar { background: #d1ecf1; color: #0c5460; }
+.status-badge.selesai { background: #d4edda; color: #155724; }
+.status-badge.batal { background: #f8d7da; color: #72cbff; }
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #28a745;
+}
+
+.empty-state i {
+    font-size: 4em;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.empty-state h3 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: white;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 27px rgba(0,0,0,0.05);
+        padding: 20px 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 120px 20px 80px;
+    }
+    
+    .hero-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    
+    .hero-image i {
+        font-size: 12em;
+    }
+    
+    .lapangan-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .detail-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .availability-section {
+        padding: 30px 20px;
+    }
+    
+    .jadwal-table {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em;
+    }
+    
+    .section-title {
+        font-size: 2em;
+    }
+    
+    .lapangan-card {
+        margin: 0 10px;
+    }
+    
+}
+/* Pemesanan & Pembayaran Styles */
+.pemesanan-container, .pembayaran-container {
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.pemesanan-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+}
+
+.lapangan-preview {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.lapangan-preview img {
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.lapangan-info h2 {
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.pemesanan-form {
+    padding: 50px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.total-preview {
+    background: #f8f9fa;
+    padding: 25px 30px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.total-harga {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #92e9ff;
+}
+
+.btn-pesan-large {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(45deg, #95cfff, #4ecdc4);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-pesan-large:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(125, 249, 255, 0.4);
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.back-btn:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Pembayaran Styles */
+.pembayaran-container h1 {
+    text-align: center;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    margin: 0;
+}
+
+.booking-detail {
+    background: #f8f9fa;
+    padding: 40px;
+    border-radius: 15px;
+    margin: 30px 40px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    font-size: 1.1em;
+}
+
+.total-row strong {
+    color: #86b1ff;
+    font-size: 1.3em;
+}
+
+.upload-form {
+    padding: 0 40px 50px;
+}
+
+.upload-form .form-group {
+    margin-bottom: 30px;
+}
+
+.upload-form input[type="file"] {
+    padding: 12px;
+    background: #f8f9fa;
+}
+
+.bank-info {
+    background: #e9ecef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+.btn-upload {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(40, 167, 69, 0.4);
+}
+
+/* Alert Styles */
+.alert {
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 40px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .lapangan-preview {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .pemesanan-form, .upload-form {
+        padding: 30px 20px;
+    }
+    
+    .booking-detail {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+/* Blog Styles */
+.blog-hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 120px 0 80px;
+    text-align: center;
+}
+
+.blog-hero h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+}
+
+.blog-section {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.blog-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.blog-content {
+    padding: 30px;
+}
+
+.blog-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.date {
+    background: #667eea;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+.blog-content h2 {
+    font-size: 1.4em;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.blog-content p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.read-more:hover {
+    border-bottom-color: #667eea;
+}
+
+/* Detail Blog */
+.detail-blog {
+    min-height: 100vh;
+    padding: 120px 0 80px;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.blog-header img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.blog-header h1 {
+    font-size: 2.8em;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.2;
+}
+
+.blog-content-full {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+}
+
+.blog-content-full p {
+    margin-bottom: 20px;
+}
+
+.blog-content-full h2, .blog-content-full h3 {
+    color: #333;
+    margin: 30px 0 15px;
+}
+
+.blog-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+}
+
+.back-to-blog {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 15px 30px;
+    border: 2px solid #667eea;
+    border-radius: 50px;
+    transition: all 0.3s;
+}
+
+.back-to-blog:hover {
+    background: #667eea;
+    color: white;
+}
+
+/* Form Blog Admin */
+.form-container {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.form-container h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Responsive Blog */
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .blog-hero h1 {
+        font-size: 2.2em;
+    }
+    
+    .blog-header h1 {
+        font-size: 2em;
+    }
+    
+    .blog-content-full {
+        font-size: 1em;
+        padding: 0 20px;
+    }
+}
+.jadwal-sibuk-warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+.jadwal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+.jadwal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    font-weight: 500;
+}
+.status-pending { color: #856404; }
+.status-dibayar { color: #0c5460; }
+.status-selesai { color: #155724; }
