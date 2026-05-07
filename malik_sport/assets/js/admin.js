@@ -1,4 +1,4 @@
-// Sidebar Toggle
+
 const toggleSidebar = document.querySelector('.toggle-sidebar');
 const sidebar = document.querySelector('.sidebar');
 const mainContent = document.querySelector('.main-content');
@@ -8,7 +8,6 @@ toggleSidebar.addEventListener('click', () => {
     mainContent.classList.toggle('sidebar-collapsed');
 });
 
-// Close alerts
 document.querySelectorAll('.close-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.target.closest('.alert').style.animation = 'slideUp 0.3s ease forwards';
@@ -18,7 +17,6 @@ document.querySelectorAll('.close-btn').forEach(btn => {
     });
 });
 
-// Tolak pesanan confirmation
 function tolakPesanan(bookingId) {
     if (confirm('Yakin ingin menolak pesanan ini?')) {
         const form = document.createElement('form');
@@ -32,7 +30,6 @@ function tolakPesanan(bookingId) {
     }
 }
 
-// Search functionality
 document.getElementById('search')?.addEventListener('input', function() {
     const searchTerm = this.value.toLowerCase();
     const rows = document.querySelectorAll('.admin-table tbody tr');
@@ -43,12 +40,10 @@ document.getElementById('search')?.addEventListener('input', function() {
     });
 });
 
-// Refresh button
 document.querySelector('.refresh-btn')?.addEventListener('click', () => {
     location.reload();
 });
 
-// Animate stats on load
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
