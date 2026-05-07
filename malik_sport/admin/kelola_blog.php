@@ -1,13 +1,11 @@
 <?php 
 require_once '../config/koneksi.php';
 
-// Pengecekan login admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
 
-// Proses tambah/edit artikel
 if ($_POST) {
     $judul = trim($_POST['judul']);
     $konten = $_POST['konten'];
@@ -33,7 +31,7 @@ if ($_POST) {
     }
     
     if (isset($_POST['edit_id']) && !empty($_POST['edit_id'])) {
-        // Update
+      
         if (isset($gambar)) {
             $stmt = $koneksi->prepare("UPDATE blog SET judul=?, konten=?, gambar=?, tanggal_publish=NOW() WHERE id=?");
             $stmt->execute([$judul, $konten, $gambar, $_POST['edit_id']]);
@@ -43,14 +41,12 @@ if ($_POST) {
         }
         $message = "Artikel berhasil diupdate!";
     } else {
-        // Insert
         $stmt = $koneksi->prepare("INSERT INTO blog (judul, konten, gambar) VALUES (?, ?, ?)");
         $stmt->execute([$judul, $konten, $gambar]);
         $message = "Artikel berhasil ditambahkan!";
     }
 }
 
-// Proses hapus
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $stmt = $koneksi->prepare("SELECT gambar FROM blog WHERE id=?");
     $stmt->execute([$_GET['delete']]);
@@ -65,7 +61,6 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     exit;
 }
 
-// Edit artikel
 $edit_artikel = null;
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $stmt = $koneksi->prepare("SELECT * FROM blog WHERE id=?");
@@ -73,7 +68,6 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $edit_artikel = $stmt->fetch();
 }
 
-// Ambil semua artikel
 $articles = $koneksi->query("SELECT * FROM blog ORDER BY tanggal_publish DESC")->fetchAll();
 ?>
 
