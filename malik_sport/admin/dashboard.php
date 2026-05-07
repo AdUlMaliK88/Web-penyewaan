@@ -1,13 +1,11 @@
 <?php 
 require_once '../config/koneksi.php';
 
-// Pengecekan login admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
 
-// Statistik
 $total_user = $koneksi->query("SELECT COUNT(*) as total FROM users WHERE role='user'")->fetch()['total'];
 $total_pending = $koneksi->query("SELECT COUNT(*) as total FROM jadwal_booking WHERE status_booking='pending'")->fetch()['total'];
 $pendapatan_bulan = $koneksi->query("
@@ -18,13 +16,11 @@ $pendapatan_bulan = $koneksi->query("
     AND YEAR(created_at) = YEAR(CURDATE())
 ")->fetch()['total'];
 
-// Proses aksi validasi/tolak
 if ($_POST && isset($_POST['action'])) {
     $booking_id = $_POST['booking_id'];
     $action = $_POST['action'];
     
     if ($action == 'validasi') {
-        // Update booking dan pembayaran
         $koneksi->prepare("UPDATE jadwal_booking SET status_booking = 'selesai' WHERE id = ?")->execute([$booking_id]);
         $koneksi->prepare("UPDATE pembayaran SET status_pembayaran = 'valid' WHERE booking_id = ?")->execute([$booking_id]);
         $message = "Pesanan berhasil divalidasi!";
@@ -36,11 +32,9 @@ if ($_POST && isset($_POST['action'])) {
         $message_type = "warning";
     }
     
-    // Refresh data setelah aksi
     $total_pending = $koneksi->query("SELECT COUNT(*) as total FROM jadwal_booking WHERE status_booking='pending'")->fetch()['total'];
 }
 
-// Ambil data pembayaran untuk tabel
 $stmt = $koneksi->query("
     SELECT jb.id, jb.tanggal_main, jb.jam_mulai, jb.jam_selesai, jb.total_harga,
            l.nama_lapangan, u.nama as user_nama, p.bukti_transfer, jb.status_booking, p.status_pembayaran
