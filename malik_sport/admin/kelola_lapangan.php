@@ -1,19 +1,16 @@
 <?php 
 require_once '../config/koneksi.php';
 
-// Pengecekan login admin - HARUS DI BARIS PERTAMA
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
 
-// Buat folder lapangan jika belum ada
 $upload_dir = '../assets/images/lapangan/';
 if (!file_exists($upload_dir)) {
     mkdir($upload_dir, 0777, true);
 }
 
-// Proses tambah/edit lapangan
 $message = '';
 if ($_POST) {
     $nama_lapangan = trim($_POST['nama_lapangan']);
@@ -32,7 +29,6 @@ if ($_POST) {
             $file_path = $upload_dir . $foto;
             
             if (move_uploaded_file($file['tmp_name'], $file_path)) {
-                // Hapus foto lama jika edit
                 if (isset($_POST['edit_id'])) {
                     $old_foto = $_POST['old_foto'];
                     if ($old_foto && file_exists($upload_dir . $old_foto)) {
@@ -44,7 +40,6 @@ if ($_POST) {
     }
     
     if (isset($_POST['edit_id']) && !empty($_POST['edit_id'])) {
-        // UPDATE
         if ($foto) {
             $stmt = $koneksi->prepare("UPDATE lapangan SET nama_lapangan=?, kategori=?, harga_per_jam=?, foto=?, deskripsi=? WHERE id=?");
             $stmt->execute([$nama_lapangan, $kategori, $harga_per_jam, $foto, $deskripsi, $_POST['edit_id']]);
@@ -55,7 +50,6 @@ if ($_POST) {
         $message = "Lapangan berhasil diupdate!";
         $message_type = "success";
     } else {
-        // INSERT
         $stmt = $koneksi->prepare("INSERT INTO lapangan (nama_lapangan, kategori, harga_per_jam, foto, deskripsi) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([$nama_lapangan, $kategori, $harga_per_jam, $foto, $deskripsi]);
         $message = "Lapangan baru berhasil ditambahkan!";
@@ -63,9 +57,9 @@ if ($_POST) {
     }
 }
 
-// Proses hapus
+
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
-    // Ambil foto lama untuk dihapus
+    
     $stmt = $koneksi->prepare("SELECT foto FROM lapangan WHERE id=?");
     $stmt->execute([$_GET['delete']]);
     $lapangan = $stmt->fetch();
@@ -74,13 +68,13 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
         unlink($upload_dir . $lapangan['foto']);
     }
     
-    // Hapus dari database
+ 
     $koneksi->prepare("DELETE FROM lapangan WHERE id=?")->execute([$_GET['delete']]);
     $message = "Lapangan berhasil dihapus!";
     $message_type = "warning";
 }
 
-// Edit lapangan
+
 $edit_lapangan = null;
 if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $stmt = $koneksi->prepare("SELECT * FROM lapangan WHERE id=?");
@@ -88,7 +82,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $edit_lapangan = $stmt->fetch();
 }
 
-// Ambil semua lapangan
+
 $lapangans = $koneksi->query("SELECT * FROM lapangan ORDER BY id DESC")->fetchAll();
 ?>
 
