@@ -1,13 +1,12 @@
 <?php 
 require_once '../config/koneksi.php';
 
-// KEAMANAN: Hanya admin yang bisa akses
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
 
-// Proses tambah user baru
+
 if (isset($_POST['tambah_user'])) {
     $nama = trim($_POST['nama']);
     $email = trim($_POST['email']);
@@ -23,7 +22,7 @@ if (isset($_POST['tambah_user'])) {
     }
 }
 
-// Proses ubah role
+
 if (isset($_GET['toggle_role']) && is_numeric($_GET['toggle_role'])) {
     $user_id = $_GET['toggle_role'];
     $stmt = $koneksi->prepare("SELECT role FROM users WHERE id = ? AND id != ?");
@@ -37,17 +36,16 @@ if (isset($_GET['toggle_role']) && is_numeric($_GET['toggle_role'])) {
     }
 }
 
-// Proses hapus user
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     $delete_id = $_GET['delete'];
-    // Tidak boleh hapus diri sendiri
+   
     if ($delete_id != $_SESSION['user_id']) {
         $koneksi->prepare("DELETE FROM users WHERE id = ?")->execute([$delete_id]);
         $success = "User berhasil dihapus!";
     }
 }
 
-// Ambil semua user (kecuali admin sendiri untuk aksi)
+
 $stmt = $koneksi->query("SELECT * FROM users ORDER BY role DESC, created_at DESC");
 $users = $stmt->fetchAll();
 ?>
