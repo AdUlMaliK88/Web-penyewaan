@@ -1,4 +1,4 @@
-/* Admin Dashboard Styles */
+
 .admin-wrapper {
     display: flex;
     min-height: 100vh;
@@ -99,7 +99,6 @@
     padding: 30px;
 }
 
-/* Stats Cards */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
