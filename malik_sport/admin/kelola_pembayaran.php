@@ -1,13 +1,12 @@
 <?php 
 require_once '../config/koneksi.php';
 
-// Pengecekan admin
+
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
     header('Location: ../login.php');
     exit;
 }
 
-// Proses validasi pembayaran
 if ($_POST && isset($_POST['action'])) {
     $booking_id = $_POST['booking_id'];
     
@@ -22,7 +21,7 @@ if ($_POST && isset($_POST['action'])) {
     exit;
 }
 
-// Ambil data pembayaran
+
 $pembayarans = $koneksi->query("
     SELECT jb.id, jb.tanggal_main, jb.jam_mulai, jb.jam_selesai, jb.total_harga,
            l.nama_lapangan, u.nama as user_nama, p.bukti_transfer, jb.status_booking
